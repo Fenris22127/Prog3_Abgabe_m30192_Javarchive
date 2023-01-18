@@ -1,4 +1,4 @@
-package de.medieninformatik.server;
+package de.medieninformatik.server.rest;
 
 import jakarta.ws.rs.core.Application;
 

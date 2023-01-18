@@ -1,19 +1,41 @@
-plugins {
-    id 'java'
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'application'
 
-group 'de.medieninformatik'
-version '1.0-SNAPSHOT'
+    group 'de.medieninformatik'
+    version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
+    ext {
+        junitVersion = '5.9.1'
+        jerseyVersion = '3.0.3'
+        grizzlyVersion = '3.0.1'
+        restVersion = '3.0.0'
+        jaxbVersion = '3.0.1'
+        mysqlVersion = '8.0.31'
+    }
 
-test {
-    useJUnitPlatform()
+    run {
+        standardInput = System.in
+        standardOutput = System.out
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }

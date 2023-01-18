@@ -1,13 +1,22 @@
-package de.medieninformatik.server;
+package de.medieninformatik.server.rest;
 
+import de.medieninformatik.common.Ansi;
+import de.medieninformatik.common.Book;
+import de.medieninformatik.server.database.BookQuery;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Verarbeitet die Anfragen der Clients und stellt die benötigten Methoden bereit.
+ *
  * @author Elisa Johanna Woelk (m30192)
+ * @version 2.1
+ * @since 17.0.5
  */
 @Path("books")
 public class Rest {
@@ -15,175 +24,100 @@ public class Rest {
     /**
      * Erstellt einen {@link Logger} für diese Klasse
      */
-    private final Logger LOGGER = Logger.getLogger(Rest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Rest.class.getName());
 
+    private static final Book testbook = new Book(
+            0, "x", "x", 0, 0, "x", List.of(0,0), List.of(0,0), 4.04);
+
+    /**
+     * Gibt alle Bücher in der Datenbank im JSON Format zurück.
+     *
+     * @return Eine {@link Response}, welches eine {@link List} mit {@link Book} Objekten im JSON Format beinhaltet
+     */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("getAll")
+    @Produces(MediaType.APPLICATION_JSON)
     public static Response getAllBooks() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("All Books here");
-        //...
-        return Response.ok(stringBuilder.toString()).build();
+        LOGGER.log(Level.INFO, "{0}Getting all books{1}\n", new Object[]{Ansi.CYAN, Ansi.RESET});
+        List<Book> allBooks = BookQuery.getAllBooks();
+        //TODO: Database & Server blocking each other
+        return Response.ok().entity(allBooks).build();
+        //TODO: Case: DB Error, like DB empty
     }
 
+    /**
+     * Gibt das Buch mit der übergebenen ID in der Datenbank im JSON Format zurück.
+     *
+     * @return Eine {@link Response}, welche ein {@link Book} Objekt im JSON Format beinhaltet
+     */
     @GET
     @Path("{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public static Response getBook(@PathParam("id") int id) {
-        StringBuilder stringBuilder = new StringBuilder();
-        //...
-        stringBuilder.append("Book" + id);
-        return Response.ok(stringBuilder.toString()).build();
+        LOGGER.log(Level.INFO, "{0}Getting book with ID {1}{2}\n", new Object[]{Ansi.CYAN, id, Ansi.RESET});
+        Book book = BookQuery.getBook(id);
+        //TODO: Database & Server blocking each other
+        return Response.ok().entity(book).build();
+        //TODO: Case: ID not in Database
     }
 
+    /**
+     * Erhält ein Buch im JSON Format und fügt dies der Datenbank und dem GUI hinzu. <br>
+     * <b>Diese Methode ist nur über den Master Client ausführbar!</b>
+     *
+     * @param book Das neue Buch
+     * @return Eine {@link Response}, welches das Ergebnis des Vorgangs meldet
+     */
     @PUT
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response createBook(String book) {
-        StringBuilder stringBuilder = new StringBuilder();
-        //...
-        stringBuilder.append(book);
-        return Response.ok(stringBuilder.toString()).build();
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response createBook(Book book) {
+        LOGGER.log(Level.INFO, "{0}Creating new book\n{1}\n{2}\n",
+                new Object[]{Ansi.CYAN, book, Ansi.RESET});
+        //TODO: Database stuff here
+        return Response.ok().build();
+        //TODO: Case: Couldn't add book
+        //TODO: Case: No rights
     }
 
+    /**
+     * Erhält eine ID und ein Buch im JSON Format und ändert das Buch mit der ID zu dem Inhalt des übergebenen Buches.
+     * <br>
+     * <b>Diese Methode ist nur über den Master Client ausführbar!</b>
+     *
+     * @param id Die ID des zu ändernden Buches
+     * @param book Das veränderte Buch
+     * @return Eine {@link Response}, welches das Ergebnis des Vorgangs meldet
+     */
     @POST
-    @Path("{id}/{title}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response editBook(@PathParam("id") int id, @PathParam("title") String title) {
-        StringBuilder stringBuilder = new StringBuilder();
-        //...
-        stringBuilder.append(id + " -> " + title);
-        return Response.ok(stringBuilder.toString()).build();
+    @Path("edit/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response editBook(@PathParam("id") int id, Book book) {
+        LOGGER.log(Level.INFO, "{0}Editing book with ID {1}\n{2}\n{3}\n",
+                new Object[]{Ansi.CYAN, id, book, Ansi.RESET});
+        //TODO: Database stuff here
+        return Response.ok().build();
+        //TODO: Case: Couldn't edit book
+        //TODO: Case: No rights
     }
 
+    /**
+     * Löscht das Buch mit der ID. <br>
+     * <b>Diese Methode ist nur über den Master Client ausführbar!</b>
+     *
+     * @param id Die ID des zu löschenden Buches
+     * @return Eine {@link Response}, welches das Ergebnis des Vorgangs meldet
+     */
     @DELETE
-    @Path("{id}")
+    @Path("delete/{id}")
     public Response deleteBook(@PathParam("id") int id) {
-        StringBuilder stringBuilder = new StringBuilder();
-        //...
-        return Response.ok(stringBuilder.toString()).build();
+        LOGGER.log(Level.INFO, "{0}Deleting book with ID {1}\n{2}\n",
+                new Object[]{Ansi.CYAN, id, Ansi.RESET});
+        //TODO: Database stuff here
+        //TODO: Do GUI stuff here
+        return Response.ok().build();
+        //TODO: Case: Couldn't delete book
+        //TODO: Case: No rights
     }
-
-    /*@GET
-    @Path("/seats")
-    @Produces(MediaType.TEXT_PLAIN)
-    public static Response getAllSeats() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLUMNS; col++) {
-                if (seats[row][col].isBooked()) {
-                    stringBuilder.append("[X] ");
-                }
-                else {
-                    stringBuilder.append("[ ] ");
-                }
-            }
-            stringBuilder.append(System.lineSeparator());
-        }
-        return Response.ok(stringBuilder.toString()).build();
-    }
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public static Response getAllReservations() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLUMNS; col++) {
-                stringBuilder.append(seats[row][col].toString()).append(System.lineSeparator());
-            }
-        }
-        return Response.ok(stringBuilder.toString()).build();
-    }
-
-    @GET
-    @Path("{row}/{col}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response getReservation(
-            @PathParam("row") int row,
-            @PathParam("col") int col) {
-        logger.log(INFO, "Getting Reservation for Seat in row {0} column {1}", new Object[] {row, col});
-        Response response;
-        try {
-            Reservation r = seats[row][col];
-            response = Response.ok(r.toString()).build();
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            logger.log(WARNING, "Seat {0}-{1} is not a valid seat!", new Object[]{row, col});
-            response = Response.noContent().status(Response.Status.NOT_FOUND).build();
-        }
-        return response;
-    }
-
-    @GET
-    @Path("/check")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response checkReservation(
-            @QueryParam("row") int row,
-            @QueryParam("column") int col) {
-        Response response;
-        try {
-            boolean exists = seats[row][col].isBooked();
-            response = Response.ok(exists).build();
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            logger.log(WARNING, "Seat {0}-{1} is not a valid seat!", new Object[]{row, col});
-            response = Response.noContent().status(Response.Status.NOT_FOUND).build();
-        }
-        return response;
-    }
-
-    @PUT
-    @Path("{row}/{col}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response makeReservation(
-            @PathParam("row") int row,
-            @PathParam("col") int col,
-            String name) {
-        Response response;
-        try {
-            if (!seats[row][col].isBooked()) {
-                seats[row][col].setName(name);
-                seats[row][col].setBooked(true);
-                logger.log(INFO, "Created new Reservation under {0} for seat {1}-{2}", new Object[]{name, row, col});
-                response = Response.noContent().status(Response.Status.OK).build();
-            }
-            else {
-                logger.log(INFO, "Seat {0}-{1} is already booked under {2}", new Object[]{row, col, seats[row][col].getName()});
-                response = Response.noContent().status(Response.Status.CONFLICT).build();
-            }
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            logger.log(WARNING, "Seat {0}-{1} is not a valid seat!", new Object[]{row, col});
-            response = Response.noContent().status(Response.Status.NOT_FOUND).build();
-        }
-        return response;
-    }
-
-    @DELETE
-    @Path("{row}/{col}")
-    public Response deleteReservation(
-            @PathParam("row") int row,
-            @PathParam("col") int col) {
-        Response response;
-        try {
-            if (seats[row][col].isBooked()) {
-                seats[row][col].setBooked(false);
-                seats[row][col].setName("");
-                logger.log(INFO, "Reservation for seat {0}-{1} under {2} was deleted!",
-                        new Object[]{row, col, seats[row][col].getName()});
-                response = Response.noContent().status(Response.Status.OK).build();
-            } else {
-                logger.log(WARNING, "Reservation for seat {0}-{1} could not be deleted, seat is not booked!",
-                        new Object[]{row, col});
-                response = Response.noContent().status(Response.Status.NOT_FOUND).build();
-            }
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
-            logger.log(WARNING, "Seat {0}-{1} is not a valid seat!", new Object[]{row, col});
-            response = Response.noContent().status(Response.Status.NOT_FOUND).build();
-        }
-        return response;
-    }*/
 }

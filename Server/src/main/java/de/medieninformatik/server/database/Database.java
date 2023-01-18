@@ -4,6 +4,7 @@ import de.medieninformatik.common.Ansi;
 import de.medieninformatik.common.Author;
 import de.medieninformatik.common.Book;
 import de.medieninformatik.common.Subfield;
+import de.medieninformatik.server.database.utils.SQL;
 
 import java.sql.*;
 import java.util.List;
@@ -24,7 +25,8 @@ public class Database {
     public static void start() {
         try {
             statement = connection.createStatement();
-            LOGGER.log(Level.INFO, "{0}Connection to database established!{1}\n", new Object[]{Ansi.GREEN, Ansi.RESET});
+            LOGGER.log(Level.INFO, "{0}Connection to database established!{1}\n",
+                    new Object[]{Ansi.GREEN, Ansi.RESET});
         }
         catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database#main(): Error while accessing the database");
@@ -36,52 +38,12 @@ public class Database {
     }
 
     private static void createTables() {
-        String createBookTable = """
-                CREATE TABLE IF NOT EXISTS `Book` (
-                ID int NOT NULL,
-                Title varchar(255) NOT NULL,
-                Publisher varchar(255),
-                PublicationDate int(4),
-                Pages int,
-                ISBN varchar(13) NOT NULL,
-                Rating DOUBLE PRECISION(3, 2),
-                PRIMARY KEY (ID)
-                );
-                """;
-        String createBookSubfieldsTable = """
-                CREATE TABLE IF NOT EXISTS `BookSubfields` (
-                    BookID int NOT NULL,
-                    SubfieldID int NOT NULL
-                );
-                """;
-        String createSubfieldsTable = """
-                CREATE TABLE IF NOT EXISTS `Subfield` (
-                ID int NOT NULL,
-                Name varchar(255) NOT NULL,
-                PRIMARY KEY (ID)
-                );
-                """;
-        String createBookAuthorsTable = """
-                CREATE TABLE IF NOT EXISTS `BookAuthors` (
-                    BookID int NOT NULL,
-                    AuthorID int NOT NULL
-                );
-                """;
-        String createAuthorsTable = """
-                CREATE TABLE IF NOT EXISTS `Author` (
-                ID int NOT NULL,
-                FirstName varchar(255),
-                LastName varchar(255) NOT NULL,
-                PRIMARY KEY (ID)
-                );
-                """;
-
         try {
-            statement.execute(createBookTable);
-            statement.execute(createBookSubfieldsTable);
-            statement.execute(createSubfieldsTable);
-            statement.execute(createBookAuthorsTable);
-            statement.execute(createAuthorsTable);
+            statement.execute(SQL.CREATE_BOOK_TABLE);
+            statement.execute(SQL.CREATE_BOOK_SUBFIELDS_TABLE);
+            statement.execute(SQL.CREATE_SUBFIELDS_TABLE);
+            statement.execute(SQL.CREATE_BOOK_AUTHORS_TABLE);
+            statement.execute(SQL.CREATE_AUTHORS_TABLE);
         }
         catch (SQLException se) {
             if (se.getClass().equals(SQLTimeoutException.class)) {
@@ -117,12 +79,8 @@ public class Database {
         LOGGER.log(Level.INFO, "{0}Adding books{1}\n", new Object[]{Ansi.CYAN, Ansi.RESET});
         List<Book> books = Data.createBookList();
         for (Book book : books) {
-            String bookSQL = String.format("""
-                    INSERT INTO
-                    book(id, title, publisher, publicationdate, pages, isbn, rating)
-                    VALUES
-                    (%d, '%s', '%s', %d, %d, '%s', %f);
-                    """,
+            String bookSQL = String.format(
+                    SQL.ADD_BOOK,
                     book.id(),
                     book.title(),
                     book.publisher(),
@@ -140,12 +98,8 @@ public class Database {
             }
 
             for (int i = 0; i < book.authors().size(); i++) {
-                String bookAuthorSQL = String.format("""
-                    INSERT INTO
-                    bookauthors(bookid, authorid)
-                    VALUES
-                    (%d, %d);
-                    """, book.id(), book.authors().get(i));
+                String bookAuthorSQL = String.format(
+                    SQL.ADD_BOOK_AUTHORS, book.id(), book.authors().get(i));
                 try {
                     statement.execute(bookAuthorSQL);
                 }
@@ -156,12 +110,8 @@ public class Database {
             }
 
             for (int i = 0; i < book.subfields().size(); i++) {
-                String bookSubsSQL = String.format("""
-                    INSERT INTO
-                    booksubfields(bookid, subfieldid)
-                    VALUES
-                    (%d, %d);
-                    """, book.id(), book.subfields().get(i));
+                String bookSubsSQL = String.format(
+                    SQL.ADD_BOOK_SUBFIELDS, book.id(), book.subfields().get(i));
                 try {
                     statement.execute(bookSubsSQL);
                 }
@@ -179,11 +129,8 @@ public class Database {
         LOGGER.log(Level.INFO, "{0}Adding authors{1}\n", new Object[]{Ansi.CYAN, Ansi.RESET});
         List<Author> authors = Data.createAuthorList();
         for (Author author : authors) {
-            String authorSQL = String.format("""
-                    INSERT INTO author(id, firstname, lastname)
-                    VALUES
-                    (%d, '%s', '%s')
-                    """,
+            String authorSQL = String.format(
+                    SQL.ADD_AUTHOR,
                     author.id(),
                     author.firstName(),
                     author.lastName()
@@ -203,11 +150,8 @@ public class Database {
         LOGGER.log(Level.INFO, "{0}Adding subfields{1}\n", new Object[]{Ansi.CYAN, Ansi.RESET});
         List<Subfield> subfields = Data.createSubfieldList();
         for (Subfield subfield : subfields) {
-            String subfieldSQL = String.format("""
-                    INSERT INTO subfield(id, name)
-                    VALUES
-                    (%d, '%s')
-                    """,
+            String subfieldSQL = String.format(
+                    SQL.ADD_SUBFIELD,
                     subfield.id(),
                     subfield.name()
             );
@@ -224,36 +168,9 @@ public class Database {
 
     private static void addForeignKeys() {
         LOGGER.log(Level.INFO, "{0}Adding foreign keys{1}\n", new Object[]{Ansi.CYAN, Ansi.RESET});
-        String addFKBookAuthor = """
-                ALTER TABLE `bookauthors`
-                    ADD CONSTRAINT `AuthorFK`
-                        FOREIGN KEY (`AuthorID`)
-                            REFERENCES `author`(`ID`)
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE,
-                    ADD CONSTRAINT `BookAuthFK`
-                        FOREIGN KEY (`BookID`)
-                            REFERENCES `book`(`ID`)
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE;
-                """;
-        String addFKBookSubfield = """
-                ALTER TABLE `booksubfields`
-                    ADD CONSTRAINT `SubfieldFK`
-                        FOREIGN KEY (`SubfieldID`)
-                            REFERENCES `subfield`(`ID`)
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE,
-                    ADD CONSTRAINT `BookSubFK`
-                        FOREIGN KEY (`BookID`)
-                            REFERENCES `book`(`ID`)
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE;
-                """;
-
         try {
-            statement.execute(addFKBookAuthor);
-            statement.execute(addFKBookSubfield);
+            statement.execute(SQL.ADD_FK_BOOK_AUTHORS);
+            statement.execute(SQL.ADD_FK_BOOK_SUBFIELDS);
             LOGGER.log(Level.INFO, "{0}Added foreign keys{1}\n", new Object[]{Ansi.GREEN, Ansi.RESET});
         }
         catch (SQLException e) {

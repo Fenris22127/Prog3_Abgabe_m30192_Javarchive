@@ -16,4 +16,8 @@ dependencies {
     implementation "org.glassfish.grizzly:grizzly-http-server:${grizzlyVersion}"
     implementation "org.glassfish.grizzly:grizzly-websockets:${grizzlyVersion}"
     implementation "org.glassfish.jersey.containers:jersey-container-grizzly2-http:${jerseyVersion}"
+    implementation project(path: ':Common')
+    implementation "com.mysql:mysql-connector-j:${mysqlVersion}"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+    implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:3.1.0'
 }

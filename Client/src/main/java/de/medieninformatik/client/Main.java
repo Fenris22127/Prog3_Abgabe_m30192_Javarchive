@@ -1,5 +1,8 @@
-package de.medieninformatik;
+package de.medieninformatik.client;
 
+import de.medieninformatik.common.Book;
+
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -13,63 +16,46 @@ public class Main {
      * @param args <-
      */
     public static void main(String[] args) {
-        final String baseUri = "http://localhost:8080/rest";
+        final String baseUri = "http://localhost:3306/rest";
         userInput(baseUri);
     }
 
-    /**
-     * Erlaubt es dem Nutzer, sich alle Sitze und Reservierungen anzeigen zu lassen, die Reservierung eines bestimmten
-     * Sitzplatzes einzusehen, den Reservierungsstatus eines bestimmten Sitzplatzes zu prüfen, einen Sitzplatz zu
-     * buchen oder die Reservierung eines Sitzplatzes zu löschen. <br>
-     * Je nach Eingabe wird die entsprechende Methode über den {@link ReservationClient} ausgeführt und das Resultat
-     * ausgegeben.
-     * @param baseUri Ein {@link String}: Die zu verwendende {@link java.net.URI URI}
-     */
     private static void userInput(String baseUri) {
-        ReservationClient reservations = new ReservationClient(baseUri);
+        BooksClient client = new BooksClient(baseUri);
         Scanner sc = new Scanner(System.in);
+        Book book = new Book(
+                0,
+                "test",
+                "test",
+                3000,
+                42,
+                "test",
+                List.of(0,0,0,0),
+                List.of(0,0,0,0),
+                4.04);
+
         while (true) {
             System.out.println("""
                     What would you like to do?
-                    (1) See all seats and their booking status
-                    (2) Get the booking details for a certain seat
-                    (3) Get the booking status for a certain seat
-                    (4) Book a certain seat
-                    (5) Get the booking details for all seats
-                    (6) Delete the reservation for a certain seat
+                    (1) See books
+                    (2) Get a certain book
+                    (3) Create a book
+                    (4) Edit a book
+                    (5) Delete a book
                     """);
             int ans = sc.nextInt();
             switch (ans) {
-                case 1 -> reservations.getAllSeats(); //print all seats as either [ ] (free) or [X] (booked)
-                case 2 -> {
-                    int[] seatNr = getSeatNr(sc);
-                    reservations.getReservation(seatNr[0], seatNr[1]); //get Reservation for seat in row x, column y
-                }
+                case 1 -> client.getAllBooks();
+                case 2 -> client.getBook(ans);
                 case 3 -> {
-                    int[] seatNr = getSeatNr(sc);
-                    reservations.hasReservation(seatNr[0], seatNr[1]); //get Reservation for seat in row x, column y
-                }
-                case 4 -> {
-                    int[] seatNr = getSeatNr(sc);
-                    System.out.printf("Under what name would you like to book seat %d-%d?%n", seatNr[0] + 1, seatNr[1] + 1);
+                    System.out.println("Title?");
                     String name = sc.next();
-                    if (name.isBlank() || name.isEmpty()) {
-                        System.out.println("Name must not be blank or empty!");
-                        while (name.isBlank() || name.isEmpty()) {
-                            System.out.printf("Under what name would you like to book seat %d-%d?",
-                                    (seatNr[0] + 1), (seatNr[1] + 1));
-                            name = sc.nextLine();
-                        }
-                    }
-                    reservations.makeReservation(seatNr[0], seatNr[1], name); //get Reservation for seat in row x, column y
+                    client.createBook(book);
                 }
-                case 5 -> reservations.getAllReservations();
-                case 6 -> {
-                    int[] seatNr = getSeatNr(sc);
-                    reservations.deleteReservation(seatNr[0], seatNr[1]);
-                }
+                case 4 -> client.editBook(book);
+                case 5 -> client.deleteBook(book);
                 default -> System.out.printf(
-                        "%d is not a valid input!%nValid answers: Numbers between and including 1-6.%n",
+                        "%d is not a valid input!%nValid answers: Numbers between and including 1-5.%n",
                         ans);
             }
             System.out.printf("%n%nWould you like to do something else? (y/n)%n");
@@ -81,20 +67,5 @@ public class Main {
                 break;
             }
         }
-    }
-
-    /**
-     * Nimmt die Angaben des Nutzers zu der Reihe und Spalte des Sitzplatzes auf.
-     * @param sc Ein {@link Scanner}: Der {@link Scanner} aus der {@link #userInput(String) userInput()}-Methode
-     * @return Ein {@link Integer}-{@link java.lang.reflect.Array Array}: Die Reihe des Sitzes ist an der ersten
-     * Stelle, die Spalte an der Zweiten
-     */
-    private static int[] getSeatNr(Scanner sc) {
-        int[] seatNr = new int[2];
-        System.out.println("In which row is the seat?");
-        seatNr[0] = sc.nextInt() - 1;
-        System.out.println("In which column is the seat?");
-        seatNr[1] = sc.nextInt() - 1;
-        return seatNr;
     }
 }

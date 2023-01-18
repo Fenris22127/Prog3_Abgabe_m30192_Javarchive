@@ -1,2 +1,5 @@
-rootProject.name = 'FixErrorPls'
+rootProject.name = 'Prog3_Abgabe_m30192_Javarchive'
+include 'Server'
+include 'Common'
+include 'Client'
 

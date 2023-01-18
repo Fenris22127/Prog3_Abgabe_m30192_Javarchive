@@ -1,12 +1,8 @@
-package de.medieninformatik.client.controller;
+package de.medieninformatik.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.medieninformatik.client.BooksClient;
-import de.medieninformatik.client.Filter;
-import de.medieninformatik.client.IBooksOverview;
 import de.medieninformatik.common.Ansi;
-import de.medieninformatik.common.Book;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BooksClientController implements IBooksOverview {
+public class BooksClientController {
 
     /**
      * Erstellt einen {@link Logger} für diese Klasse
@@ -76,30 +72,5 @@ public class BooksClientController implements IBooksOverview {
                 new Object[]{Ansi.CYAN, Ansi.RESET});
         BooksClient client = new BooksClient("http://localhost:3306/rest");
         client.getBook(1);
-    }
-
-    @Override
-    public void getAllBooks() {
-        //...
-    }
-
-    @Override
-    public void getBook(int id) {
-        //...
-    }
-
-    @Override
-    public void createBook(Book book) {
-        //...
-    }
-
-    @Override
-    public void editBook(Book book) {
-        //...
-    }
-
-    @Override
-    public void deleteBook(Book book) {
-        //...
     }
 }

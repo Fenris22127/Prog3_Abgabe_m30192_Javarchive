@@ -5,6 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5399fb0-e1d6-440f-bf8a-4e0a197c3b76" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/SubfieldQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/utils/BookQueryResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/utils/SQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/authors.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/books.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/language.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/subfields.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/tests.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Client/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/BooksClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/BooksClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/BooksClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/BooksClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/IBooksOverview.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/IBooksOverview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/de/medieninformatik/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/de/medieninformatik/client/books-overview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/de/medieninformatik/client/books-overview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Ansi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Ansi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Subfield.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/de/medieninformatik/common/Subfield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/Startup.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/Startup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/BookQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/BookQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/rest/BookApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/rest/BookApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/rest/Rest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/de/medieninformatik/server/rest/Rest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/medieninformatik/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/medieninformatik/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,23 +48,231 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/Server">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/Client">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Client" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Client" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Client" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Server" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Server" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Server" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FixErrorPls" type="f1a62948:ProjectNode" />
+                <item name="Server" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2KSiqYzX6ofgdDUyEjBk7bH5sxR" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/Elisa/IdeaProjects/Prog3_Abgabe_m30192_Javarchive/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Elisa\IdeaProjects\Prog3_Abgabe_m30192_Javarchive\src\main\resources" />
+      <recent name="C:\Users\Elisa\IdeaProjects\FixErrorPls\Server\src\main\java\de\medieninformatik\server\database" />
+      <recent name="C:\Users\Elisa\IdeaProjects\FixErrorPls\Client\src\main\resources\de\medieninformatik\client" />
+      <recent name="C:\Users\Elisa\IdeaProjects\FixErrorPls\Common\src\main\java" />
+      <recent name="C:\Users\Elisa\IdeaProjects\FixErrorPls\Client\src\main\java\de\medieninformatik" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="de.medieninformatik.client" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="de.medieninformatik.client" />
+      <recent name="de.medieninformatik.common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.BookQuery">
+    <configuration name="BookQuery" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="de.medieninformatik.server.database.BookQuery" />
+      <module name="Prog3_Abgabe_m30192_Javarchive.Server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.medieninformatik.server.database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.medieninformatik.server.Server" />
+      <module name="Prog3_Abgabe_m30192_Javarchive.Server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.medieninformatik.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Startup" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.medieninformatik.server.Startup" />
+      <module name="FixErrorPls.Server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.medieninformatik.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="de.medieninformatik.client.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.medieninformatik.client.Main" />
+      <module name="FixErrorPls.Client.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.medieninformatik.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FixErrorPls:Server [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Server" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Gradle.FixErrorPls:Server [run]" />
+        <item itemvalue="Application.de.medieninformatik.client.Main" />
+        <item itemvalue="Application.Startup" />
+        <item itemvalue="Application.BookQuery" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -42,7 +281,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673974577073</updated>
+      <workItem from="1673974578165" duration="1824000" />
+      <workItem from="1673976512300" duration="5159000" />
+      <workItem from="1674062063544" duration="8979000" />
+      <workItem from="1674072257843" duration="1000" />
+      <workItem from="1674072343371" duration="5030000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

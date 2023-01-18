@@ -1,5 +1,7 @@
-package de.medieninformatik;
+package de.medieninformatik.server;
 
+import de.medieninformatik.common.Ansi;
+import de.medieninformatik.server.rest.BookApplication;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.ServerConfiguration;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
@@ -9,9 +11,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static java.util.logging.Level.INFO;
 
 /**
  * Startet den Server auf der lokalen Maschine.
@@ -22,12 +23,12 @@ public class Server {
     /**
      * Erstellt einen {@link Logger} für diese Klasse
      */
-    private static final Logger LOGGER = Logger.getLogger("org.glassfish");
+    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
 
     /**
      * Die {@link URI} für diese Implementation des Servers
      */
-    private static String uri = "http://localhost:8080/rest";
+    private static String uri = "http://localhost:3306/rest";
 
     /**
      * Startet den Server auf der lokalen Maschine über die angegebene {@link #uri URI}.
@@ -39,7 +40,7 @@ public class Server {
      */
     public static void main(String[] args) throws URISyntaxException, IOException {
         URI baseUri = new URI(uri);
-        ResourceConfig config = ResourceConfig.forApplicationClass(ReservationApplication.class);
+        ResourceConfig config = ResourceConfig.forApplicationClass(BookApplication.class);
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, config);
         StaticHttpHandler handler = new StaticHttpHandler("web");
         handler.setFileCacheEnabled(false);
@@ -47,9 +48,12 @@ public class Server {
         serverConfig.addHttpHandler(handler, "/");
 
         if(!server.isStarted()) server.start();
-        LOGGER.log(INFO, "http://localhost:8080/rest/");
-        LOGGER.log(INFO, "Server started");
-        LOGGER.log(INFO, "ENTER stops the Server");
+        LOGGER.log(Level.INFO, "{0}http://localhost:3306/rest{1}",
+                new Object[]{Ansi.CYAN, Ansi.RESET});
+        LOGGER.log(Level.INFO, "{0}Server started!{1}",
+                new Object[]{Ansi.CYAN, Ansi.RESET});
+        LOGGER.log(Level.INFO, "{0}Enter stops the server!{1}",
+                new Object[]{Ansi.CYAN, Ansi.RESET});
         System.in.read();
         server.shutdownNow();
     }
