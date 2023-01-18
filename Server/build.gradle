@@ -1,0 +1,19 @@
+application {
+    mainClass = "${group}.${project.name.toLowerCase()}.Server"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': application.mainClassName
+        )
+    }
+}
+
+dependencies {
+    implementation "org.glassfish.jersey.core:jersey-server:${jerseyVersion}"
+    implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+    implementation "org.glassfish.grizzly:grizzly-http-server:${grizzlyVersion}"
+    implementation "org.glassfish.grizzly:grizzly-websockets:${grizzlyVersion}"
+    implementation "org.glassfish.jersey.containers:jersey-container-grizzly2-http:${jerseyVersion}"
+}

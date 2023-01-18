@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.medieninformatik.client.controller.BooksClientController">
+    <HBox prefHeight="800.0" prefWidth="1100.0">
+        <VBox prefHeight="800.0" prefWidth="230.0">
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin>
+            <Label prefHeight="35.0" prefWidth="232.0" text="Javarchive">
+                <font>
+                    <Font name="System Bold Italic" size="34.0" />
+                </font>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                </padding>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <Label text="Search:">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <TextField fx:id="textSearch" prefHeight="25.0" prefWidth="127.0" />
+            <TitledPane prefHeight="438.0" prefWidth="230.0" text="Subfields">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <AnchorPane fx:id="subfields" minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="228.0">
+                    <CheckBox layoutY="6.0" mnemonicParsing="false" text="Algorithms" />
+                    <CheckBox layoutY="27.0" mnemonicParsing="false" styleClass="subCheckbox" text="Business" />
+                    <CheckBox layoutY="48.0" mnemonicParsing="false" styleClass="subCheckbox" text="Coding" />
+                    <CheckBox layoutY="69.0" mnemonicParsing="false" styleClass="subCheckbox" text="Computer Science" />
+                    <CheckBox layoutY="90.0" mnemonicParsing="false" styleClass="subCheckbox" text="Computers" />
+                    <CheckBox layoutY="111.0" mnemonicParsing="false" styleClass="subCheckbox" text="Engineering" />
+                    <CheckBox layoutY="132.0" mnemonicParsing="false" styleClass="subCheckbox" text="History" />
+                    <CheckBox layoutY="153.0" mnemonicParsing="false" styleClass="subCheckbox" text="Informatics" />
+                    <CheckBox layoutY="174.0" mnemonicParsing="false" styleClass="subCheckbox" text="Management" />
+                    <CheckBox layoutY="195.0" mnemonicParsing="false" styleClass="subCheckbox" text="Mathematics" />
+                    <CheckBox layoutY="216.0" mnemonicParsing="false" styleClass="subCheckbox" text="Nonfiction" />
+                    <CheckBox layoutY="237.0" mnemonicParsing="false" styleClass="subCheckbox" text="Philosophy" />
+                    <CheckBox layoutY="258.0" mnemonicParsing="false" styleClass="subCheckbox" text="Popular Science" />
+                    <CheckBox layoutY="279.0" mnemonicParsing="false" styleClass="subCheckbox" text="Programming" />
+                    <CheckBox layoutY="300.0" mnemonicParsing="false" styleClass="subCheckbox" text="Reference" />
+                    <CheckBox layoutY="321.0" mnemonicParsing="false" styleClass="subCheckbox" text="Science" />
+                    <CheckBox layoutY="342.0" mnemonicParsing="false" styleClass="subCheckbox" text="Software" />
+                    <CheckBox layoutY="363.0" mnemonicParsing="false" styleClass="subCheckbox" text="Technical" />
+                    <CheckBox layoutY="384.0" mnemonicParsing="false" styleClass="subCheckbox" text="Technology" />
+
+                </AnchorPane>
+            </TitledPane>
+         <Separator prefWidth="200.0">
+            <padding>
+               <Insets bottom="5.0" top="5.0" />
+            </padding>
+         </Separator>
+         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="230.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#clearFilters" prefWidth="50.0" text="Clear">
+                  <HBox.margin>
+                     <Insets right="40.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#getFilters" prefWidth="50.0" text="Filter">
+                  <HBox.margin>
+                     <Insets left="40.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
+            </children>
+         </HBox>
+         <Button fx:id="testbtn" mnemonicParsing="false" onAction="#testFunction" text="Testbutton">
+            <VBox.margin>
+               <Insets top="60.0" />
+            </VBox.margin>
+         </Button>
+        </VBox>
+      <ListView prefHeight="200.0" prefWidth="640.0">
+         <HBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </HBox.margin>
+      </ListView>
+      <VBox prefHeight="800.0" prefWidth="230.0" />
+    </HBox>
+</AnchorPane>
